@@ -1,0 +1,147 @@
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee h1 {
+            display: inline-block;
+            animation: scroll 8s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+                color: rgb(32, 76, 255);
+                background-color: rgb(92, 249, 131);
+            }
+            30%{
+                color: rgb(28, 253, 84);
+                background-color: rgb(245, 139, 241);
+                
+            }
+            60%{
+                color: rgb(248, 67, 242);
+                background-color: rgb(65, 65, 65);
+            }
+            90% {
+                
+                color: rgb(0, 0, 0);
+                background-color: rgb(255, 255, 255);
+            }
+            100%{
+                transform: translateX(-100%);
+            }
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        .map-container {
+            width: 48%;
+            height: 400px;
+        }
+        .zoom-slider-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .zoom-slider {
+            width: 200px;
+        }
+        #locationTable {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #locationTable th, #locationTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #locationTable th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .btnpre {
+            background: #FF4742;
+            border: 1px solid #FF4742;
+            border-radius: 6px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 40px;
+            outline: 0;
+            padding: 12px 14px;
+            text-align: center;
+            text-rendering: geometricprecision;
+            text-transform: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+          }
+      
+        .btnpre:hover,
+        .btnpre:active {
+            background-color: initial;
+            background-position: 0 0;
+            color: #FF4742;
+          }
+      
+        .btnpre:active {
+            opacity: 0.5;
+          }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .input-container input {
+            margin: 0 10px;
+        }
+        #locationTable {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #locationTable th, #locationTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        #locationTable th {
+            background-color: #f2f2f2;
+        }
+        
+        /* Add styles for the scrolling table body */
+        #locationTableContainer {
+            max-height: 300px; /* Set a max height for the table body */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        
+        #locationTable thead {
+            position: sticky;
+            top: 0;
+            background-color: #f2f2f2; /* Optional, to make the header stand out */
+            z-index: 1;
+        }
+        
