@@ -34,6 +34,7 @@ mapRight.on('moveend', () => {
 // Arrays to hold locations, markers, and their indices
 let locations = [];
 let markers = [];
+let markerBounds = L.latLngBounds(); // Track bounds of all markers
 
 // Fetch saved locations from the server when the page loads
 fetch('/get_locations')
@@ -62,6 +63,9 @@ function addMarker(lat, lng, index) {
     locations.push({ lat, lng, index });
     updateLocationTable();
 
+    // Update bounds to include this marker
+    markerBounds.extend([lat, lng]);
+
     // Save the location to the server (CSV file)
     fetch('/save_location', {
         method: 'POST',
@@ -71,6 +75,10 @@ function addMarker(lat, lng, index) {
     .then(response => response.json())
     .then(data => console.log(data.message))
     .catch(error => console.error("Error saving location:", error));
+
+    // Auto zoom to fit all markers after adding a new one
+    mapLeft.fitBounds(markerBounds);
+    mapRight.fitBounds(markerBounds);
 }
 
 // Function to update the locations table
@@ -117,6 +125,14 @@ function removeLocation(index) {
         .then(response => response.json())
         .then(data => console.log(data.message))
         .catch(error => console.error("Error removing location:", error));
+
+        // Recalculate bounds for all remaining markers after removal
+        markerBounds = L.latLngBounds();
+        markers.forEach(marker => markerBounds.extend(marker.markerLeft.getLatLng()));
+
+        // Adjust map view to fit the remaining markers
+        mapLeft.fitBounds(markerBounds);
+        mapRight.fitBounds(markerBounds);
     }
 }
 
@@ -132,8 +148,9 @@ document.getElementById('clearBtn').addEventListener('click', () => {
         mapRight.removeLayer(marker.markerRight);
     });
 
-    // Reset markers array
+    // Reset markers array and bounds
     markers = [];
+    markerBounds = L.latLngBounds();
 
     // Send clear request to backend
     fetch('/clear_all', { method: 'POST' })
